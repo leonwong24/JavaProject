@@ -1,3 +1,6 @@
+import java.awt.*;
+import java.awt.image.BufferStrategy;
+
 public class Game implements Runnable{
 
     //using display class
@@ -6,6 +9,8 @@ public class Game implements Runnable{
     //variable
     public int width,height;
     public String title;
+    private BufferStrategy bs;
+    private Graphics g;
 
     //creating a thread
     private Thread thread;
@@ -31,9 +36,23 @@ public class Game implements Runnable{
 
     //render game
     private void render(){
+        //get bufferstrategy from the canvas,bufferstrategy tells the comp how to draw thing
+        bs = display.getCanvas().getBufferStrategy();
+        if(bs == null){
+            display.getCanvas().createBufferStrategy(3);
+            return;
+        }
 
+        g = bs.getDrawGraphics();
+        //Start drawing graphics
+
+        g.fillRect(0,0,width,height);
+
+        //end drawing!
+        bs.show();
+        g.dispose();
     }
-    //run
+    //run the program
     public void run(){
         init();
 
@@ -43,17 +62,19 @@ public class Game implements Runnable{
         }
     }
 
-    public synchronized  void start(){
+    public synchronized void start(){
         if(running)
             return; //if game is running , don't do anything below
+
         running = true;
         thread = new Thread(this); //this = game class
         thread.start(); //start run() method
     }
 
-    public synchronized  void stop(){
+    public synchronized void stop(){
         if(!running)
             return; //if game already stop running , don't do anything down below
+
         running = false;
         try {
             thread.join();

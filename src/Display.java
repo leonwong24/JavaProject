@@ -35,4 +35,9 @@ public class Display {
         frame.pack();
 
     }
+
+    //access canvas in other class since canvas is defined as private in here
+    public Canvas getCanvas(){
+        return canvas;
+    }
 }
