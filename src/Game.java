@@ -44,9 +44,14 @@ public class Game implements Runnable{
         }
 
         g = bs.getDrawGraphics();
+        //Clear the screen before drawing
+        g.clearRect(0,0,width,height);
         //Start drawing graphics
 
-        g.fillRect(0,0,width,height);
+        g.setColor(Color.blue);
+        g.fillRect(10,50,200,100);
+        g.setColor(Color.GREEN);
+        g.fillRect(-30,70,200,300);
 
         //end drawing!
         bs.show();
