@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class Game implements Runnable{
 
@@ -12,6 +13,11 @@ public class Game implements Runnable{
     private BufferStrategy bs;
     private Graphics g;
 
+
+    //image sprite
+    private BufferedImage bg; //background image
+    private BufferedImage wall; //wall image
+    
     //creating a thread
     private Thread thread;
     //boolean for checking if the game is running
@@ -27,6 +33,8 @@ public class Game implements Runnable{
     //initiate everything include graphics before the game loop start
     private void init(){
         display = new Display(title, width, height);
+        bg = ImageLoader.loadImage("/textures/floor.png"); //load the background image to bufferedimage
+        wall = ImageLoader.loadImage("/textures/wall.png");//load the wall
     }
 
     //update everything in render
@@ -48,10 +56,16 @@ public class Game implements Runnable{
         g.clearRect(0,0,width,height);
         //Start drawing graphics
 
-        g.setColor(Color.blue);
-        g.fillRect(10,50,200,100);
-        g.setColor(Color.GREEN);
-        g.fillRect(-30,70,200,300);
+        //draw background
+        g.drawImage(bg,0,0,1600,900,null);
+
+        //spawn block
+        g.setColor(Color.BLACK);
+        g.fillOval(750, 350, 125, 125); //center block
+        g.drawImage(wall,0,0,300,100,null); //top left block
+        g.drawImage(wall,0,800,300,100,null); //bot left block
+        g.drawImage(wall,1300,0,300,100,null); //top right block
+        g.drawImage(wall,1300,800,300,100,null); //bot right block
 
         //end drawing!
         bs.show();
