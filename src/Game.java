@@ -38,7 +38,7 @@ public class Game implements Runnable{
     }
 
     //update everything in render
-    private void update(){
+    private void tick(){
 
     }
 
@@ -75,8 +75,25 @@ public class Game implements Runnable{
     public void run(){
         init();
 
+        int fps = 60;
+        double timePerTick = 1000000000 / fps; //This return the time that the system should refresh in order to achieve 60fps
+        double delta = 0;
+        long now;
+        long lastTime = System.nanoTime(); //This return the system time in nanosecond
         while(running){
-            update();
+            //fps
+            now = System.nanoTime();
+            delta += (now-lastTime) / timePerTick; //This return a percentage of time remaining till next refresh
+            lastTime = now;
+
+            if(delta >= 1){
+                tick();
+                render();
+                delta --;
+            }
+
+
+            tick();
             render();
         }
     }
