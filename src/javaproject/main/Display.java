@@ -1,3 +1,5 @@
+package javaproject.main;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -30,6 +32,7 @@ public class Display {
         canvas.setPreferredSize(new Dimension(width,height));
         canvas.setMaximumSize(new Dimension(width,height));
         canvas.setMinimumSize(new Dimension(width,height));
+        canvas.setFocusable(false); //it makes the jframe the only object to be focus
 
         frame.add(canvas);
         frame.pack();
@@ -39,5 +42,9 @@ public class Display {
     //access canvas in other class since canvas is defined as private in here
     public Canvas getCanvas(){
         return canvas;
+    }
+
+    public JFrame getFrame(){
+        return frame;
     }
 }

@@ -1,3 +1,6 @@
+package javaproject.main;
+
+import javaproject.inputs.KeyManager;
 import javaproject.states.GameState;
 import javaproject.states.MenuState;
 import javaproject.states.ShopState;
@@ -28,33 +31,41 @@ public class Game implements Runnable{
     //boolean for checking if the game is running
     private boolean running = false;
 
-    //Constructor
-    public Game(String title, int width, int height){
-        this.width = width;
-        this.height = height;
-        this.title = title;
-    }
-
     //State
     private State gameState;
     private State menuState;
     private State shopState;
 
+    //Input
+    private KeyManager keyManager;
+
+    //Constructor
+    public Game(String title, int width, int height){
+        this.width = width;
+        this.height = height;
+        this.title = title;
+        keyManager = new KeyManager();
+    }
+
+
     //initiate everything include graphics before the game loop start
     private void init(){
         display = new Display(title, width, height);
+        display.getFrame().addKeyListener(keyManager);
         bg = ImageLoader.loadImage("/textures/floor.png"); //load the background image to bufferedimage
         wall = ImageLoader.loadImage("/textures/wall.png");//load the wall
 
         //Setting the state
-        gameState = new GameState();
-        menuState = new MenuState();
-        shopState = new ShopState();
+        gameState = new GameState(this);
+        menuState = new MenuState(this);
+        shopState = new ShopState(this);
         State.setState(gameState);
     }
 
     //update everything in render
     private void tick(){
+        keyManager.tick();
+
         if(State.getCurrentState() != null){
             State.getCurrentState().tick();
         }
@@ -68,10 +79,13 @@ public class Game implements Runnable{
             display.getCanvas().createBufferStrategy(3);
             return;
         }
-
         g = bs.getDrawGraphics();
         //Clear the screen before drawing
         g.clearRect(0,0,width,height);
+
+        if(State.getCurrentState() != null){
+            State.getCurrentState().render(g);
+        }
         //Start drawing graphics
 
         //draw background
@@ -135,5 +149,9 @@ public class Game implements Runnable{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public KeyManager getKeyManager(){
+        return this.keyManager;
     }
 }
