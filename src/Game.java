@@ -1,3 +1,8 @@
+import javaproject.states.GameState;
+import javaproject.states.MenuState;
+import javaproject.states.ShopState;
+import javaproject.states.State;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -30,16 +35,29 @@ public class Game implements Runnable{
         this.title = title;
     }
 
+    //State
+    private State gameState;
+    private State menuState;
+    private State shopState;
+
     //initiate everything include graphics before the game loop start
     private void init(){
         display = new Display(title, width, height);
         bg = ImageLoader.loadImage("/textures/floor.png"); //load the background image to bufferedimage
         wall = ImageLoader.loadImage("/textures/wall.png");//load the wall
+
+        //Setting the state
+        gameState = new GameState();
+        menuState = new MenuState();
+        shopState = new ShopState();
+        State.setState(gameState);
     }
 
     //update everything in render
     private void tick(){
-
+        if(State.getCurrentState() != null){
+            State.getCurrentState().tick();
+        }
     }
 
     //render game
