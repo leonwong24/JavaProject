@@ -4,11 +4,11 @@ import javaproject.entities.Entity;
 
 import java.awt.*;
 
-public class Creature extends Entity {
+public abstract class Creature extends Entity {
     protected static float health,movementSpeed;
 
-    public Creature(float x, float y) {
-        super(x, y);
+    public Creature(float x, float y,int width, int height) {
+        super(x, y,width,height);
     }
 
     @Override

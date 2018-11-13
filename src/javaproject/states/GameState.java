@@ -12,12 +12,13 @@ public class GameState extends State {
     public GameState(Game game){
         super(game);
         player = new Player(game,500,500);
+
     }
 
 
     @Override
     public void tick() {
-
+        player.tick();
     }
 
     @Override

@@ -1,8 +1,8 @@
 package javaproject.main;
 
 import javaproject.assets.Asset;
-import javaproject.assets.SpriteSheet;
 import javaproject.inputs.KeyManager;
+import javaproject.inputs.MouseManager;
 import javaproject.states.GameState;
 import javaproject.states.MenuState;
 import javaproject.states.ShopState;
@@ -34,6 +34,7 @@ public class Game implements Runnable{
 
     //Input
     private KeyManager keyManager;
+    private MouseManager mouseManager;
 
     //Constructor
     public Game(String title, int width, int height){
@@ -41,8 +42,9 @@ public class Game implements Runnable{
         this.height = height;
         this.title = title;
 
-        //keymanager
+        //input manager
         keyManager = new KeyManager();
+        mouseManager = new MouseManager();
     }
 
 
@@ -50,8 +52,9 @@ public class Game implements Runnable{
     private void init(){
         display = new Display(title, width, height);
 
+        //applying keylistener and mouselistener to the game frame
         display.getFrame().addKeyListener(keyManager);
-
+        display.getFrame().addMouseListener(mouseManager);
 
         //Setting the state
         gameState = new GameState(this);
@@ -156,5 +159,9 @@ public class Game implements Runnable{
 
     public KeyManager getKeyManager(){
         return keyManager;
+    }
+
+    public MouseManager getMouseManager(){
+        return mouseManager;
     }
 }
