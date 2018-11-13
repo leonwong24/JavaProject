@@ -1,5 +1,6 @@
 package javaproject.entities.creatures;
 
+import javaproject.assets.Asset;
 import javaproject.main.Game;
 
 import java.awt.*;
@@ -11,31 +12,39 @@ public class Player extends Creature {
         super(x, y);
         health = 100;
         this.game = game;
-        movementSpeed = 1;
+        movementSpeed = 1f;
     }
 
     @Override
     public void tick() {
+        if(game.getKeyManager() == null){
+            System.out.println("the keymanager is null");
+        }
+        else{
+            System.out.println("received the keymanager");
+        }
+
         if(game.getKeyManager().up){
-             y -= (3*movementSpeed);
+            this.y -= (3*movementSpeed);
+            System.out.println("Up key pressed!");
         }
 
         if(game.getKeyManager().down){
-            y += (3*movementSpeed);
+            this.y += (3*movementSpeed);
         }
 
         if(game.getKeyManager().left){
-            x -= (3*movementSpeed);
+            this.x -= (3*movementSpeed);
         }
 
         if(game.getKeyManager().right){
-            x += (3*movementSpeed);
+            this.x += (3*movementSpeed);
         }
     }
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.CYAN);
-        g.fillRect((int)x,(int)y,100,100);
+        g.drawImage(Asset.player,(int)x,(int)y,null);
+
     }
 }

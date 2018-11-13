@@ -6,8 +6,10 @@ import java.awt.event.MouseEvent;
 
 
 public class KeyManager implements KeyListener{
+    //variable
     private boolean[] keys;
     public boolean up,down,left,right;
+    private int test;
 
     public KeyManager(){
         keys = new boolean[256]; //assuming we only use 265 keycode in keyevent
@@ -28,7 +30,7 @@ public class KeyManager implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         keys[e.getKeyCode()] = true;
-        System.out.println("pressed");
+        test = e.getKeyCode();
     }
 
     @Override

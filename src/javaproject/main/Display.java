@@ -32,7 +32,7 @@ public class Display {
         canvas.setPreferredSize(new Dimension(width,height));
         canvas.setMaximumSize(new Dimension(width,height));
         canvas.setMinimumSize(new Dimension(width,height));
-        canvas.setFocusable(false); //it makes the jframe the only object to be focus
+        canvas.setFocusable(false);//it makes the jframe the only object to be focus
 
         frame.add(canvas);
         frame.pack();

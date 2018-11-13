@@ -1,5 +1,6 @@
 package javaproject.states;
 
+import javaproject.assets.Asset;
 import javaproject.entities.creatures.Player;
 import javaproject.main.Game;
 
@@ -10,7 +11,7 @@ public class GameState extends State {
     private Player player;
     public GameState(Game game){
         super(game);
-        player = new Player(game,100,100);
+        player = new Player(game,500,500);
     }
 
 

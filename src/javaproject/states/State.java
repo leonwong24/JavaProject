@@ -17,6 +17,7 @@ public abstract class State {
 
     public abstract void render(Graphics g);
 
+    //variable
     private static State currentState = null;
 
     public static void setState(State state){
