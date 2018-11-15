@@ -5,7 +5,10 @@ import javaproject.entities.Entity;
 import java.awt.*;
 
 public abstract class Creature extends Entity {
-    protected static float health,movementSpeed;
+
+
+
+    protected float health,movementSpeed,xMove,yMove;
 
     public Creature(float x, float y,int width, int height) {
         super(x, y,width,height);
@@ -21,4 +24,24 @@ public abstract class Creature extends Entity {
 
     }
 
+    public float getHealth() {
+        return health;
+    }
+
+    public void setHealth(float health) {
+        this.health = health;
+    }
+
+    public float getMovementSpeed() {
+        return movementSpeed;
+    }
+
+    public void setMovementSpeed(float movementSpeed) {
+        this.movementSpeed = movementSpeed;
+    }
+
+    public void move(){
+        x += xMove;
+        y += yMove;
+    }
 }
