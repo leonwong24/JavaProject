@@ -1,5 +1,9 @@
 package javaproject.main;
 
+import javaproject.entities.creatures.Player;
+import javaproject.states.GameState;
+import javaproject.states.State;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,6 +14,7 @@ public class Display {
 
     private String title;
     private int width,height;
+
 
     //Constructor
     public Display(String title, int width, int height){
@@ -33,6 +38,7 @@ public class Display {
         canvas.setMaximumSize(new Dimension(width,height));
         canvas.setMinimumSize(new Dimension(width,height));
         canvas.setFocusable(false);//it makes the jframe the only object to be focus
+
 
         frame.add(canvas);
         frame.pack();

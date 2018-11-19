@@ -1,5 +1,7 @@
 package javaproject.states;
 import java.awt.*;
+
+import javaproject.entities.creatures.Player;
 import javaproject.main.Game;
 
 public abstract class State {
@@ -27,4 +29,5 @@ public abstract class State {
     public static State getCurrentState() {
         return currentState;
     }
+
 }

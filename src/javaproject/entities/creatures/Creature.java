@@ -44,4 +44,12 @@ public abstract class Creature extends Entity {
         x += xMove;
         y += yMove;
     }
+
+    public void damage(Player player){
+        //if enemies intersect with player
+    }
+
+    public static void spawn(){
+
+    }
 }

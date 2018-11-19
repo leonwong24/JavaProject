@@ -5,16 +5,16 @@ import javaproject.main.Game;
 
 import java.awt.*;
 
-public class Walker extends Creature {
+public class Crawler extends Creature {
 
     public Player target;
     private float damage;
     private double angle;
     private double diffrX,diffrY;
 
-    public Walker(Game game, float x, float y,Player player) {
+    public Crawler(Game game, float x, float y, Player player) {
         super(x, y, 64, 64);
-        this.setHealth(50);
+        this.setHealth(30);
         this.setMovementSpeed(1f);
         target = player;
     }
@@ -27,7 +27,7 @@ public class Walker extends Creature {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Asset.walker,(int)x,(int)y,width,height,null);
+        g.drawImage(Asset.crawler,(int)x,(int)y,width,height,null);
     }
 
     public float getDamage() {
