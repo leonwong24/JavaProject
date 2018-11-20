@@ -57,12 +57,5 @@ public class Player extends Creature {
         }
     }
 
-    public float getPlayerXPosition(){
-        return x;
-    }
-
-    public float getPlayerYPosition(){
-        return y;
-    }
 
 }

@@ -1,9 +1,5 @@
 package javaproject.main;
 
-import javaproject.entities.creatures.Player;
-import javaproject.states.GameState;
-import javaproject.states.State;
-
 import javax.swing.*;
 import java.awt.*;
 

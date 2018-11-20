@@ -54,7 +54,7 @@ public class Game implements Runnable{
 
         //applying keylistener and mouselistener to the game frame
         display.getFrame().addKeyListener(keyManager);
-        display.getFrame().addMouseListener(mouseManager);
+        display.getCanvas().addMouseListener(mouseManager);
 
         //Setting the state
         gameState = new GameState(this);
@@ -70,6 +70,7 @@ public class Game implements Runnable{
     //update everything in render
     private void tick(){
         keyManager.tick();
+        mouseManager.tick();
 
         if(State.getCurrentState() != null){
             State.getCurrentState().tick();

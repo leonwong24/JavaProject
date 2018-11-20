@@ -2,6 +2,8 @@ package javaproject.states;
 
 import javaproject.assets.Asset;
 import javaproject.entities.creatures.*;
+import javaproject.entities.object.Bullet;
+import javaproject.inputs.BulletController;
 import javaproject.main.Game;
 import java.awt.*;
 import java.util.ArrayList;
@@ -9,20 +11,32 @@ import java.util.ArrayList;
 public class GameState extends State {
 
     public Player player;
+    private BulletController bc;
+
+
 
     public int enemyCount = 5;
     //spawn point
 
 
 
-    //create an array list that stores enemies
+    //create an array list that stores enemies,bullet
     private ArrayList<Creature> enemies = new ArrayList<Creature>();
+    private ArrayList<Bullet> bullets = new ArrayList<>();
 
 
     public GameState(Game game){
         super(game);
         player = new Player(game,800,450);
-        
+        bc = new BulletController(game,player);
+
+        //bullet
+        /*if(game.getKeyManager().up){
+            System.out.println("up key  pressed");
+            bullets.add(new Bullet(game,player,(int)player.getX(),(int)player.getY(),game.getMouseManager().mouseClickedX,game.getMouseManager().mouseClickedY));
+        }*/
+
+        //enemies
         for(int i = 0 ; i < enemyCount ; i++){
             //pick random enemy, 3 is the maximum number and 1 is the minimum
             int enemyPicker = (int)(Math.random() * 3) + 1;
@@ -54,6 +68,8 @@ public class GameState extends State {
         for(int i = 0 ; i < enemies.size() ; i++){
             enemies.get(i).tick();
         }
+
+        bc.tick();
     }
 
     @Override
@@ -65,12 +81,15 @@ public class GameState extends State {
         g.drawImage(Asset.wall,1300,0,300,100,null); //top right block
         g.drawImage(Asset.wall,1300,800,300,100,null); //bot right block*/
         g.setColor(Color.BLACK);
-        g.fillOval(750, 350, 125, 125); //center block
+        g.fillRect(750, 350, 125, 125); //center block
+        g.drawString("Player health:" +player.getHeight(),1300,50);
         player.render(g);
 
         for(int i = 0 ; i < enemies.size() ; i++){
             enemies.get(i).render(g);
         }
+
+        bc.render(g);
     }
 
     private int spawnSpotX(){

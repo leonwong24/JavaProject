@@ -44,8 +44,8 @@ public class Walker extends Creature {
         //this is the algorithm of chasing the players
 
         //first we have to find the distance between the players and the enemies
-        diffrX = this.x-target.getPlayerXPosition();
-        diffrY = this.y-target.getPlayerYPosition();
+        diffrX = this.x-target.getX();
+        diffrY = this.y-target.getY();
 
         //calculate the angle between the player and enemies
         angle = Math.atan2(diffrY,diffrX);

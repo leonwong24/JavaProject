@@ -3,33 +3,37 @@ package javaproject.inputs;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+
 public class MouseManager implements MouseListener {
-    public int clicked;
-    public int leftClick = MouseEvent.BUTTON1;
-    public int x, y;
+    //variable
+    public boolean leftPressed;
+    private boolean[] mouseClick;
+
+    //mouse position
+    public int mouseClickedX, mouseClickedY;
 
     public MouseManager(){
-
+        mouseClick = new boolean[1]; //we only use left click
     }
+
+    public void tick(){
+        leftPressed = mouseClick[0];
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getButton() == leftClick){
-            //get frame position
-            clicked = leftClick;
-            x = e.getX();
-            y = e.getY();
-        }
-
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+       mouseClick[0] = true;
+       mouseClickedX = e.getX();
+       mouseClickedY = e.getY();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        clicked = 0;
+        mouseClick[0] = false;
     }
 
     @Override
@@ -42,7 +46,7 @@ public class MouseManager implements MouseListener {
 
     }
 
-    public void tick(){
 
-    }
+
+
 }
