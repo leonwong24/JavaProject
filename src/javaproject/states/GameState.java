@@ -3,10 +3,15 @@ package javaproject.states;
 import javaproject.assets.Asset;
 import javaproject.entities.creatures.*;
 import javaproject.entities.object.Bullet;
+import javaproject.entities.object.Wall;
 import javaproject.inputs.BulletController;
 import javaproject.main.Game;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static javaproject.assets.Asset.wall;
 
 public class GameState extends State {
 
@@ -14,29 +19,25 @@ public class GameState extends State {
     private BulletController bc;
 
 
-
     public int enemyCount = 5;
-    //spawn point
-
+    //timer
+    Timer timer;
 
 
     //create an array list that stores enemies,bullet
     private ArrayList<Creature> enemies = new ArrayList<Creature>();
-    private ArrayList<Bullet> bullets = new ArrayList<>();
+    public ArrayList<Wall> walls = new ArrayList<>();
 
 
-    public GameState(Game game){
+    public GameState(Game game) {
         super(game);
-        player = new Player(game,800,450);
-        bc = new BulletController(game,player);
+        player = new Player(game, 800, 450);
+        bc = new BulletController(game, player);
 
         //enemies
-        for(int i = 0 ; i < enemyCount ; i++){
-            //pick random enemy, 3 is the maximum number and 1 is the minimum
-            int enemyPicker = (int)(Math.random() * 3) + 1;
 
             //a holder for spawnSpotx
-            int spawnX = spawnSpotX();
+            /*int spawnX = spawnSpotX();
             if(enemyPicker == 1){
                 //spawn walker
                 enemies.add(new Walker(game,spawnX,spawnSpotY(spawnX),player));
@@ -50,8 +51,27 @@ public class GameState extends State {
             else{
                 //spawn tanker
                 enemies.add(new Tank(game,spawnX,spawnSpotY(spawnX),player));
-            }
-        }
+            }*/
+
+            //timer
+            //This is going to spawn enemies every 2 second
+            timer = new Timer();
+            //for(int i = 0; i < enemyCount ;i++){
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        enemySpawn();
+                    }
+                }, 0,2000);
+            //}
+
+
+        //4 walls
+        walls.add(new Wall(0, 0, 300, 100));//top left block
+        walls.add(new Wall(0, 800, 300, 100));//bot left block
+        walls.add(new Wall(1300, 0, 300, 100)); //top right block
+        walls.add(new Wall(1300, 800, 300, 100));//bot right block*/
+
     }
 
 
@@ -59,34 +79,82 @@ public class GameState extends State {
     public void tick() {
         player.tick();
 
-        for(int i = 0 ; i < enemies.size() ; i++){
+        for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).tick();
         }
 
+        //bulletcontroller tick
         bc.tick();
+        //walls tick
+        for (Wall wall : walls) {
+            wall.tick();
+        }
     }
 
     @Override
     public void render(Graphics g) {
-        g.fillOval(750, 350, 125, 125); //center block
-        g.drawImage(Asset.floor,0,0,1600,900,null);//floor*/
-        g.drawImage(Asset.wall,0,0,300,100,null); //top left block
-        g.drawImage(Asset.wall,0,800,300,100,null); //bot left block
-        g.drawImage(Asset.wall,1300,0,300,100,null); //top right block
-        g.drawImage(Asset.wall,1300,800,300,100,null); //bot right block*/
-        g.setColor(Color.BLACK);
-        g.fillRect(750, 350, 125, 125); //center block
-        g.drawString("Player health:" +player.getHeight(),1300,50);
+        g.drawImage(Asset.floor, 0, 0, 1600, 900, null);//floor*/
         player.render(g);
 
-        for(int i = 0 ; i < enemies.size() ; i++){
+        for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).render(g);
         }
 
         bc.render(g);
+
+        //walls render
+        for (Wall wall : walls) {
+            wall.render(g);
+        }
+        g.drawString("Player health:" + player.getHealth(), 1300, 50);
+
     }
 
-    private int spawnSpotX(){
+    private void enemySpawn() {
+            //pick random enemy, 3 is the maximum number and 1 is the minimum
+            int enemyPicker = (int) (Math.random() * 3) + 1;
+
+            //randomize 1 -3 to pick enemy spawn position
+            int x =(int)(Math.random()*3)+1;
+
+            //a holder for enemies spawn X position and Y position
+            int spawnX,spawnY;
+            switch(x){
+                case 1:
+                    spawnX =800;
+                    int y = (int)(Math.random()*2) + 1;
+                    switch(y){
+                        case 1:
+                            spawnY = 0;
+                            break;
+                        default:
+                            spawnY = 900;
+                            break;
+                    }
+                    break;
+
+                case 2:
+                    spawnX = 0;
+                    spawnY = 450;
+                    break;
+                default:
+                    spawnX = 1600;
+                    spawnY = 450;
+                    break;
+            }
+
+            if (enemyPicker == 1) {
+                //spawn walker
+                enemies.add(new Walker(game, spawnX,spawnY, player));
+            } else if (enemyPicker == 2) {
+                //spawn crawler
+                enemies.add(new Crawler(game, spawnX,spawnY, player));
+            } else {
+                //spawn tanker
+                enemies.add(new Tank(game, spawnX,spawnY, player));
+            }
+
+    /*private int spawnSpotX(){
         //this return 1 - 3 randomize number
         int x = (int)(Math.random()*3)+1;
         int result = 0;
@@ -105,9 +173,9 @@ public class GameState extends State {
         }
         return result;
 
-    }
+    }*/
 
-    private int spawnSpotY(int spawnSpotX) {
+    /*private int spawnSpotY(int spawnSpotX) {
 
         int result = 0;
         if (spawnSpotX == 800){
@@ -123,5 +191,7 @@ public class GameState extends State {
             result = 450;
 
         return result;
+    }*/
+
     }
 }

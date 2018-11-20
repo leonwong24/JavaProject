@@ -5,7 +5,7 @@ import javaproject.main.Game;
 
 import java.awt.*;
 
-public class Walker extends Creature {
+public class Walker extends Creature{
 
     public Player target;
     private float damage;

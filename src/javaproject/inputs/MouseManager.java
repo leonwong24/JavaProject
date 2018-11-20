@@ -33,7 +33,6 @@ public class MouseManager implements MouseListener {
        mouseClick[0] = true;
        mouseClickedX = e.getX();
        mouseClickedY = e.getY();
-       System.out.println("X:" + e.getX()+"Y:" +e.getY());
 
        //for starting the game in menu
         if(State.getCurrentState() == Game.menuState){

@@ -5,7 +5,7 @@ import javaproject.main.Game;
 
 import java.awt.*;
 
-public class Tank extends Creature {
+public class Tank extends Creature{
 
     public Player target;
     private float damage;

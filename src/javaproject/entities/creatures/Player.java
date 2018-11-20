@@ -2,10 +2,12 @@ package javaproject.entities.creatures;
 
 import javaproject.assets.Asset;
 import javaproject.main.Game;
+import javaproject.states.GameState;
+import javaproject.states.State;
 
 import java.awt.*;
 
-public class Player extends Creature {
+public class Player extends Creature{
     private Game game;
 
     public Player(Game game,float x, float y) {
@@ -56,6 +58,5 @@ public class Player extends Creature {
             }
         }
     }
-
 
 }
