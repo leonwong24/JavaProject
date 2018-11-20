@@ -35,7 +35,7 @@ public class BulletController {
             //remove bullet or keep them
 
             //keep the bullet and tick
-            if(bullets.get(i).getX() >= 0 && bullets.get(i).getX() <=1600 && bullets.get(i).getY()>=0 && bullets.get(i).getY() <= 900){
+            if(bullets.get(i).getX() >= -50 && bullets.get(i).getX() <=1650 && bullets.get(i).getY()>=-50 && bullets.get(i).getY() <= 950){
                 bullets.get(i).tick();
             }
             else{

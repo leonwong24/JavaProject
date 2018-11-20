@@ -55,7 +55,7 @@ public class Bullet extends Entity {
 
         //angle between player and mouseclicked position
         angle = Math.atan2(diffrY,diffrX);
-        System.out.println("Angle " + Math.toDegrees(angle));
+        //System.out.println("Angle " + angle);
         //return (angle);
         x += (speed*(float)Math.cos(angle));
         y += (speed*(float)Math.sin(angle));
