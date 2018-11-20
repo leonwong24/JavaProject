@@ -19,6 +19,8 @@ public class Game implements Runnable{
     //variable
     public int width,height;
     public String title;
+
+    //graphics render
     private BufferStrategy bs;
     private Graphics g;
 
@@ -28,9 +30,9 @@ public class Game implements Runnable{
     private boolean running = false;
 
     //State
-    private State gameState;
-    private State menuState;
-    private State shopState;
+    private static State gameState;
+    public static State menuState;
+    private static State shopState;
 
     //Input
     private KeyManager keyManager;
@@ -60,7 +62,7 @@ public class Game implements Runnable{
         gameState = new GameState(this);
         menuState = new MenuState(this);
         shopState = new ShopState(this);
-        State.setState(gameState);
+        State.setState(menuState);
 
         //loading assets
         Asset.init();
@@ -164,5 +166,9 @@ public class Game implements Runnable{
 
     public MouseManager getMouseManager(){
         return mouseManager;
+    }
+
+    public static GameState getGameState(){
+        return (GameState) gameState;
     }
 }

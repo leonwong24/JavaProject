@@ -15,6 +15,7 @@ public class Bullet extends Entity {
     private int mouseClickedX , mouseClickedY;
     private float speed;
     private float damage;
+    private float xMove , yMove;
 
     public void setSpeed(float speed) {
         this.speed = speed;
@@ -29,16 +30,16 @@ public class Bullet extends Entity {
         super(x, y, 16, 16);
         this.game = game;
         this.player = player;
-        angle = bulletFire();
+        //angle = bulletFire();
         mouseClickedX = ClickedX;
         mouseClickedY = ClickedY;
         setDamage(10f);
-        setSpeed(5f);
+        setSpeed(3f);
     }
 
     @Override
     public void tick() {
-        fire(angle);
+        bulletFire();
     }
 
     @Override
@@ -47,23 +48,24 @@ public class Bullet extends Entity {
     }
 
 
-    private double bulletFire(){
+    private void bulletFire(){
         //find distance between player and mouseclicked position
-        diffrX = player.getX() - mouseClickedX;
-        diffrY = player.getY() - mouseClickedY;
+        diffrX = mouseClickedX - player.getX();
+        diffrY = mouseClickedY - player.getY();
 
         //angle between player and mouseclicked position
         angle = Math.atan2(diffrY,diffrX);
         System.out.println("Angle " + Math.toDegrees(angle));
-        return (angle);
-        //x += (speed*(float)Math.cos(angle));
-        //y += (speed*(float)Math.sin(angle));
+        //return (angle);
+        x += (speed*(float)Math.cos(angle));
+        y += (speed*(float)Math.sin(angle));
 
 
 
     }
 
     public void fire(double angle){
+
         x += (speed*(float)Math.cos(angle));
         y += (speed*(float)Math.sin(angle));
     }

@@ -4,6 +4,7 @@ import javaproject.main.ImageLoader;
 
 import java.awt.image.BufferedImage;
 
+/** This is class that crops the image from the sprite sheet which we can draw the asset image simply calling asset.XX*/
 public class Asset {
     public static BufferedImage player,wall,floor,bullet,walker,crawler,tank;
 

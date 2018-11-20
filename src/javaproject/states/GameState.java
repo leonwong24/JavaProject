@@ -30,12 +30,6 @@ public class GameState extends State {
         player = new Player(game,800,450);
         bc = new BulletController(game,player);
 
-        //bullet
-        /*if(game.getKeyManager().up){
-            System.out.println("up key  pressed");
-            bullets.add(new Bullet(game,player,(int)player.getX(),(int)player.getY(),game.getMouseManager().mouseClickedX,game.getMouseManager().mouseClickedY));
-        }*/
-
         //enemies
         for(int i = 0 ; i < enemyCount ; i++){
             //pick random enemy, 3 is the maximum number and 1 is the minimum

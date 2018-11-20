@@ -1,5 +1,9 @@
 package javaproject.inputs;
 
+import javaproject.main.Game;
+import javaproject.states.GameState;
+import javaproject.states.State;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -29,6 +33,17 @@ public class MouseManager implements MouseListener {
        mouseClick[0] = true;
        mouseClickedX = e.getX();
        mouseClickedY = e.getY();
+       System.out.println("X:" + e.getX()+"Y:" +e.getY());
+
+       //for starting the game in menu
+        if(State.getCurrentState() == Game.menuState){
+            if(e.getX()>=650 && e.getX() <=850 && e.getY()>=500 && e.getY() <= 600){
+                //start button pressed
+                State.setState(Game.getGameState());
+                System.out.println("You clciked the start button!");
+            }
+        }
+
     }
 
     @Override
