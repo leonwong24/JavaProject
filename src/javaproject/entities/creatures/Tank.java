@@ -21,6 +21,7 @@ public class Tank extends Creature{
         target = player;
         this.setDamage(20f);
         this.setAttackRate(3000000000L); //3sec
+        this.setKillScore(30);//get 10 point after killing it
     }
 
     @Override

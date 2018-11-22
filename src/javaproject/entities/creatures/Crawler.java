@@ -21,6 +21,7 @@ public class Crawler extends Creature{
         target = player;
         this.setDamage(5f);
         this.setAttackRate(1000000000L); //1sec
+        this.setKillScore(15); //get 15 point after killing it
     }
 
     @Override

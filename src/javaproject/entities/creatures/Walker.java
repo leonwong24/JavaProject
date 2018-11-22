@@ -21,6 +21,7 @@ public class Walker extends Creature{
         target = player;
         this.setDamage(10f);
         this.setAttackRate(2000000000L); //2sec
+        this.setKillScore(10); //get 10 point after killing it
     }
 
     @Override

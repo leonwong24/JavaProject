@@ -36,13 +36,14 @@ public class Bullet extends Entity {
         //angle = bulletFire();
         mouseClickedX = ClickedX;
         mouseClickedY = ClickedY;
+        angle = findAngle();
         setDamage(10f);
         setSpeed(3f);
     }
 
     @Override
-    public void tick() {
-            bulletFire();
+    public void tick() { ;
+        fire(angle);
     }
 
     @Override
@@ -51,17 +52,17 @@ public class Bullet extends Entity {
     }
 
 
-    private void bulletFire(){
+    private double findAngle(){
         //find distance between player and mouseclicked position
-        diffrX = mouseClickedX - player.getX();
-        diffrY = mouseClickedY - player.getY();
+        diffrX = mouseClickedX - x;
+        diffrY = mouseClickedY - y;
 
         //angle between player and mouseclicked position
         angle = Math.atan2(diffrY,diffrX);
         //System.out.println("Angle " + angle);
-        //return (angle);
-        x += (speed*(float)Math.cos(angle));
-        y += (speed*(float)Math.sin(angle));
+        return (angle);
+        //x += (speed*(float)Math.cos(angle));
+        //y += (speed*(float)Math.sin(angle));
 
 
 

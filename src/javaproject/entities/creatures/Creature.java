@@ -87,7 +87,7 @@ public abstract class Creature extends Entity{
 
     public void checkAlive(){
         //health lower than 0
-        if(health < 0)
+        if(health <= 0)
             alive = false;
     }
 

@@ -16,7 +16,7 @@ public class GameState extends State {
 
     public Player player;
     private BulletController bc;
-    private int score;
+    private int score = 0;
 
 
     public int enemyCount = 5;
@@ -114,6 +114,7 @@ public class GameState extends State {
             wall.render(g);
         }
         g.drawString("Player health:" + player.getHealth(), 1300, 50);
+        g.drawString("Score: "  + score, 1300,70);
 
     }
 
@@ -228,6 +229,7 @@ public class GameState extends State {
                     if(enemy.isAlive() == false){
                         //remove enemy
                         enemyIterator.remove();
+                        score +=enemy.getKillScore();
                     }
                     break;
                 }
