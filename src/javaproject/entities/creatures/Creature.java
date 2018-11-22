@@ -1,14 +1,31 @@
 package javaproject.entities.creatures;
 
 import javaproject.entities.Entity;
+import javaproject.entities.object.Bullet;
 
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public abstract class Creature extends Entity {
+public abstract class Creature extends Entity{
 
 
 
-    protected float health,movementSpeed,xMove,yMove;
+    protected float health;
+    protected float movementSpeed;
+    protected float xMove;
+
+    public void setxMove(float xMove) {
+        this.xMove = xMove;
+    }
+
+    public void setyMove(float yMove) {
+        this.yMove = yMove;
+    }
+
+    protected float yMove;
+    protected boolean alive = true;
+
 
     public Creature(float x, float y,int width, int height) {
         super(x, y,width,height);
@@ -47,5 +64,19 @@ public abstract class Creature extends Entity {
 
     public void damage(Player player){
         //if enemies intersect with player
+    }
+
+    public void hitByBullet(){
+        //if enemy hit by bullet
+    }
+
+    public void checkAlive(){
+        //health lower than 0
+        if(health < 0)
+            alive = false;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }

@@ -1,9 +1,12 @@
 package javaproject.entities.creatures;
 
 import javaproject.assets.Asset;
+import javaproject.entities.object.Bullet;
 import javaproject.main.Game;
 
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Crawler extends Creature{
 
@@ -15,19 +18,26 @@ public class Crawler extends Creature{
     public Crawler(Game game, float x, float y, Player player) {
         super(x, y, 64, 64);
         this.setHealth(30);
-        this.setMovementSpeed(1f);
+        this.setMovementSpeed(2.5f);
         target = player;
     }
 
     @Override
     public void tick() {
-        chaseTarget();
-        move();
+        checkAlive();
+        if(alive){
+            chaseTarget();
+            move();
+        }
+
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Asset.crawler,(int)x,(int)y,width,height,null);
+        if(alive){
+            g.drawImage(Asset.crawler,(int)x,(int)y,width,height,null);
+        }
+
     }
 
     public float getDamage() {
@@ -38,7 +48,7 @@ public class Crawler extends Creature{
         this.damage = damage;
     }
 
-    public void chaseTarget(){
+    private void chaseTarget(){
         xMove = 0;
         yMove = 0;
         //this is the algorithm of chasing the players
@@ -54,5 +64,29 @@ public class Crawler extends Creature{
         //have to put - on Y because Y behave differently (increase while going down)
         yMove += -(movementSpeed*(float)Math.sin(angle));
         xMove += -(movementSpeed*(float)Math.cos(angle));
+    }
+
+    @Override
+    public void hitByBullet() {
+        //A crawler will significantly slowed after being hit by bullet
+        setMovementSpeed(0.5f);
+        setHealth(health - Bullet.getDamage());
+        System.out.println("Crawler hit by bullet");
+
+
+        //set back the movement speed after 2 sec delay
+        Timer t = new Timer();
+        TimerTask restoreSpeed = new TimerTask(){
+        int count = 0;
+            @Override
+            public void run() {
+                setMovementSpeed(2.5f);
+                count++;
+                if(count > 1)
+                    t.cancel();
+                    t.purge();
+            }
+        };
+        t.schedule(restoreSpeed,2000);
     }
 }

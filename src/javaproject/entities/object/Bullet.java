@@ -14,15 +14,19 @@ public class Bullet extends Entity {
     private double diffrX,diffrY,angle;
     private int mouseClickedX , mouseClickedY;
     private float speed;
-    private float damage;
-    private float xMove , yMove;
+    public static float damage;
+    public boolean hitSomething; //check if bullet hit something , if this is true remove bullet
 
     public void setSpeed(float speed) {
         this.speed = speed;
     }
 
-    public void setDamage(float damage) {
-        this.damage = damage;
+    public static void setDamage(float setDamage) {
+        damage = setDamage;
+    }
+
+    public static float getDamage() {
+        return damage;
     }
 
 
@@ -33,18 +37,23 @@ public class Bullet extends Entity {
         //angle = bulletFire();
         mouseClickedX = ClickedX;
         mouseClickedY = ClickedY;
+        hitSomething = false;
         setDamage(10f);
         setSpeed(3f);
     }
 
     @Override
     public void tick() {
-        bulletFire();
+        if(!hitSomething){
+            bulletFire();
+        }
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Asset.bullet,(int)x,(int)y,null);
+        if(!hitSomething) {
+            g.drawImage(Asset.bullet, (int) x, (int) y, null);
+        }
     }
 
 
@@ -70,6 +79,9 @@ public class Bullet extends Entity {
         y += (speed*(float)Math.sin(angle));
     }
 
+    public void setHitSomething(boolean hitSomething) {
+        this.hitSomething = hitSomething;
+    }
 
 
 }

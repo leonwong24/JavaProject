@@ -20,13 +20,19 @@ public class Player extends Creature{
 
     @Override
     public void tick() {
-        getInput();
-        move();
+       checkAlive();
+        if(alive){
+           getInput();
+           move();
+       }
+
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Asset.player,(int)x,(int)y,width,height,null);
+        if(alive){
+            g.drawImage(Asset.player,(int)x,(int)y,width,height,null);
+        }
     }
 
     private void getInput(){

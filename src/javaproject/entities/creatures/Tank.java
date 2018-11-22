@@ -1,9 +1,12 @@
 package javaproject.entities.creatures;
 
 import javaproject.assets.Asset;
+import javaproject.entities.object.Bullet;
 import javaproject.main.Game;
 
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Tank extends Creature{
 
@@ -21,8 +24,12 @@ public class Tank extends Creature{
 
     @Override
     public void tick() {
-        chaseTarget();
-        move();
+        checkAlive();
+        if(alive){
+            chaseTarget();
+            move();
+        }
+
     }
 
     @Override
@@ -54,5 +61,14 @@ public class Tank extends Creature{
         //have to put - on Y because Y behave differently (increase while going down)
         yMove += -(movementSpeed*(float)Math.sin(angle));
         xMove += -(movementSpeed*(float)Math.cos(angle));
+    }
+
+    @Override
+    public void hitByBullet() {
+        //A tanker has no side-effect after hit by bullet
+        setHealth(health - Bullet.getDamage());
+        System.out.println("Tanker hit by bullet");
+
+
     }
 }

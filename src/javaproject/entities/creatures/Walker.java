@@ -1,9 +1,12 @@
 package javaproject.entities.creatures;
 
 import javaproject.assets.Asset;
+import javaproject.entities.object.Bullet;
 import javaproject.main.Game;
 
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Walker extends Creature{
 
@@ -21,13 +24,20 @@ public class Walker extends Creature{
 
     @Override
     public void tick() {
-        chaseTarget();
-        move();
+        checkAlive();
+        if(alive){
+            chaseTarget();
+            move();
+        }
+
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Asset.walker,(int)x,(int)y,width,height,null);
+        if(alive){
+            g.drawImage(Asset.walker,(int)x,(int)y,width,height,null);
+        }
+
     }
 
     public float getDamage() {
@@ -38,7 +48,7 @@ public class Walker extends Creature{
         this.damage = damage;
     }
 
-    public void chaseTarget(){
+    private void chaseTarget(){
         xMove = 0;
         yMove = 0;
         //this is the algorithm of chasing the players
@@ -54,5 +64,29 @@ public class Walker extends Creature{
         //have to put - on Y because Y behave differently (increase while going down)
         yMove += -(movementSpeed*(float)Math.sin(angle));
         xMove += -(movementSpeed*(float)Math.cos(angle));
+    }
+
+    @Override
+    public void hitByBullet() {
+        //A walker has slightly slowed the movement speed after being hit by bullet
+        setMovementSpeed(0.75f);
+        setHealth(health - Bullet.getDamage());
+        System.out.println("Crawler hit by bullet");
+
+
+        //set back the movement speed after 1 sec delay
+        Timer t = new Timer();
+        TimerTask restoreSpeed = new TimerTask(){
+            int count = 0;
+            @Override
+            public void run() {
+                setMovementSpeed(1f);
+                count++;
+                if(count > 1)
+                    t.cancel();
+                t.purge();
+            }
+        };
+        t.schedule(restoreSpeed,1000);
     }
 }
