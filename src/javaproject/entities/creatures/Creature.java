@@ -17,6 +17,7 @@ public abstract class Creature extends Entity{
     protected float yMove;
     protected float damage;
     protected long attackRate;
+    protected int killScore;
 
     public void setxMove(float xMove) {
         this.xMove = xMove;
@@ -101,6 +102,15 @@ public abstract class Creature extends Entity{
 
     public void setAttackRate(long attackRate) {
         this.attackRate = attackRate;
+    }
+
+
+    public int getKillScore() {
+        return killScore;
+    }
+
+    public void setKillScore(int killScore) {
+        this.killScore = killScore;
     }
 
 }

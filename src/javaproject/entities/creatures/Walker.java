@@ -20,7 +20,7 @@ public class Walker extends Creature{
         this.setMovementSpeed(1f);
         target = player;
         this.setDamage(10f);
-        this.setAttackRate(1000000000L); //2sec
+        this.setAttackRate(2000000000L); //2sec
     }
 
     @Override

@@ -20,7 +20,7 @@ public class Tank extends Creature{
         this.setMovementSpeed(0.5f);
         target = player;
         this.setDamage(20f);
-        this.setAttackRate(1000000000L); //2sec
+        this.setAttackRate(3000000000L); //3sec
     }
 
     @Override

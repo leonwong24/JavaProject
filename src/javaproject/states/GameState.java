@@ -16,6 +16,7 @@ public class GameState extends State {
 
     public Player player;
     private BulletController bc;
+    private int score;
 
 
     public int enemyCount = 5;
