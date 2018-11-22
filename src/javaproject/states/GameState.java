@@ -9,10 +9,7 @@ import javaproject.main.Game;
 import org.w3c.dom.css.Rect;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 
 public class GameState extends State {
@@ -28,7 +25,7 @@ public class GameState extends State {
 
     //create an array list that stores enemies,bullet
     private LinkedList<Creature> enemies = new LinkedList<Creature>();
-    public ArrayList<Wall> walls = new ArrayList<>();
+    public LinkedList<Wall> walls = new LinkedList<>();
     public LinkedList<Bullet> bullets = new LinkedList<>();
 
 
@@ -96,8 +93,8 @@ public class GameState extends State {
             wall.tick();
         }
 
-        bulletCheckCollisions(bc.getBullets(),enemies);
-        playerCheckCollisionsWithWall();
+        bulletCheckCollisions(bc.getBullets(),enemies,walls);
+        playerCheckCollisions(player,enemies);
     }
 
     @Override
@@ -204,49 +201,73 @@ public class GameState extends State {
     }*/
 
     //check bullet and enemy collision using rectangle intersect method
-    private void bulletCheckCollisions(LinkedList<Bullet> bullets , LinkedList<Creature> enemies) {
-        for (Bullet bullet : bullets) {
+    private void bulletCheckCollisions(LinkedList<Bullet> bullets , LinkedList<Creature> enemies,LinkedList<Wall> walls) {
+        //use an iterator to go through my list
+        //https://stackoverflow.com/questions/223918/iterating-through-a-collection-avoiding-concurrentmodificationexception-when-mo?noredirect=1&lq=1
+
+        for (Iterator<Bullet> bulletIterator = bullets.iterator(); bulletIterator.hasNext();) {
+            Bullet bullet = bulletIterator.next();
             Rectangle bulletRect = new Rectangle((int)bullet.getX(),(int)bullet.getY(),bullet.getWidth(),bullet.getHeight());
             Rectangle bulletBound = bulletRect.getBounds();
 
-            for(Creature enemy : enemies){
+            //enemy iterator
+            for(Iterator<Creature> enemyIterator = enemies.iterator();enemyIterator.hasNext();){
+                Creature enemy = enemyIterator.next();
                 Rectangle enemyRect = new Rectangle((int)enemy.getX(),(int)enemy.getY(),enemy.getWidth(),enemy.getHeight());
                 Rectangle enemyBound = enemyRect.getBounds();
 
                 if(bulletBound.intersects(enemyBound)){
                     //Bullet hit enemy
-                    bullet.setHitSomething(true);
+                    //remove bullet
+                    bulletIterator.remove();
                     enemy.hitByBullet();
 
                     //if enemy died
                     if(enemy.isAlive() == false){
-                        enemies.remove(enemy);
+                        //remove enenmy
+                        enemyIterator.remove();
                     }
+                }
+            }
+
+            //wall iterator
+            for(Iterator<Wall> wallIterator = walls.iterator();wallIterator.hasNext();){
+                Wall wall = wallIterator.next();
+                Rectangle wallRect = new Rectangle((int)wall.getX(),(int)wall.getY(),wall.getWidth(),wall.getHeight());
+                Rectangle wallBound = wallRect.getBounds();
+
+                if(bulletBound.intersects(wallBound)){
+                    //Bullet hit the wall
+                    //remove bullet
+                    System.out.println("bullet hit the wall");
+                    bulletIterator.remove();
                 }
             }
         }
     }
 
-    private void playerCheckCollisionsWithWall(){
+    private void playerCheckCollisions(Player player,LinkedList<Creature> enemies){
         Rectangle playerRect = new Rectangle((int)player.getX(),(int)player.getY(),player.getWidth(),player.getHeight());
         Rectangle playerBound = playerRect.getBounds();
 
-        for(Wall wall : walls){
-            Rectangle wallRect = new Rectangle((int)wall.getX(),(int)wall.getY(),wall.getWidth(),wall.getHeight());
-            Rectangle wallBound = wallRect.getBounds();
+        //enemies iterator
+        for(Iterator<Creature> enemyIterator = enemies.iterator();enemyIterator.hasNext();){
+            Creature enemy = enemyIterator.next();
+            Rectangle enemyRect = new Rectangle((int)enemy.getX(),(int)enemy.getY(),enemy.getWidth(),enemy.getHeight());
+            Rectangle enemyBound = enemyRect.getBounds();
 
-            if(playerBound.intersects(wallBound)){
-                //player hit the wall
-                System.out.println("Player hit the wall");
-                break;
+            if(playerBound.intersects(enemyBound)){
+                //enemy hit enemy
+                player.damage(enemy.getDamage(),enemy.getAttackRate(),enemy.getLastAttack());
+                System.out.println("player is damaged");
+
+                if(player.isAlive() == false){
+                    //GAME OVER
+
+                    System.out.println("GAME OVER");
+                }
             }
-            player.setMovementSpeed(2f);
         }
-        player.setMovementSpeed(2f);
-    }
-
-    private void playerCheckCollisionWithEnemy(){
-        
     }
 
 

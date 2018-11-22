@@ -39,7 +39,6 @@ public class MouseManager implements MouseListener {
             if(e.getX()>=650 && e.getX() <=850 && e.getY()>=500 && e.getY() <= 600){
                 //start button pressed
                 State.setState(Game.getGameState());
-                System.out.println("You clciked the start button!");
             }
         }
 

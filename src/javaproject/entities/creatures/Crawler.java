@@ -11,7 +11,6 @@ import java.util.TimerTask;
 public class Crawler extends Creature{
 
     public Player target;
-    private float damage;
     private double angle;
     private double diffrX,diffrY;
 
@@ -20,6 +19,8 @@ public class Crawler extends Creature{
         this.setHealth(30);
         this.setMovementSpeed(2.5f);
         target = player;
+        this.setDamage(5f);
+        this.setAttackRate(1000000000L); //1sec
     }
 
     @Override
@@ -71,7 +72,6 @@ public class Crawler extends Creature{
         //A crawler will significantly slowed after being hit by bullet
         setMovementSpeed(0.5f);
         setHealth(health - Bullet.getDamage());
-        System.out.println("Crawler hit by bullet");
 
 
         //set back the movement speed after 2 sec delay

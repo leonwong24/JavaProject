@@ -65,4 +65,12 @@ public class Player extends Creature{
         }
     }
 
+    @Override
+    public void damage(float damage,long attackRate,long lastAttack){
+        if(System.nanoTime() - lastAttack >= attackRate) {
+            setHealth((health) - damage);
+            setLastAttack(System.nanoTime());
+        }
+    }
+
 }

@@ -14,7 +14,7 @@ public class BulletController {
     public LinkedList<Bullet> bullets = new LinkedList<Bullet>();
     private Game game;
     private Player player;
-    private long fireRate = 200000000L;
+    private long fireRate = 200000000L; //0.2 sec
     public long lastShot;
 
     private float playerX,playerY;
@@ -44,10 +44,7 @@ public class BulletController {
             if(bullets.get(i).getX() >= -50 && bullets.get(i).getX() <=1650 && bullets.get(i).getY()>=-50 && bullets.get(i).getY() <= 950){
                 bullets.get(i).tick();
             }
-            else if(bullets.get(i).hitSomething){
-                //if the bullet hit something
-                bullets.remove(i);
-            }
+
             else{
                 //bullet out of screen
                 bullets.remove(i);
@@ -65,11 +62,4 @@ public class BulletController {
         return bullets;
     }
 
-    /*public void removeHitBullet(){
-        for(Bullet bullet :bullets){
-            if(bullet.hitSomething = true){
-                bullets.remove(bullet);
-            }
-        }
-    }*/
 }

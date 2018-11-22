@@ -11,7 +11,6 @@ import java.util.TimerTask;
 public class Tank extends Creature{
 
     public Player target;
-    private float damage;
     private double angle;
     private double diffrX,diffrY;
 
@@ -20,6 +19,8 @@ public class Tank extends Creature{
         this.setHealth(100);
         this.setMovementSpeed(0.5f);
         target = player;
+        this.setDamage(20f);
+        this.setAttackRate(1000000000L); //2sec
     }
 
     @Override
@@ -67,8 +68,5 @@ public class Tank extends Creature{
     public void hitByBullet() {
         //A tanker has no side-effect after hit by bullet
         setHealth(health - Bullet.getDamage());
-        System.out.println("Tanker hit by bullet");
-
-
     }
 }
