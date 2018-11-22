@@ -217,16 +217,18 @@ public class GameState extends State {
                 Rectangle enemyBound = enemyRect.getBounds();
 
                 if(bulletBound.intersects(enemyBound)){
-                    //Bullet hit enemy
                     //remove bullet
                     bulletIterator.remove();
+
+                    //Bullet hit enemy
                     enemy.hitByBullet();
 
                     //if enemy died
                     if(enemy.isAlive() == false){
-                        //remove enenmy
+                        //remove enemy
                         enemyIterator.remove();
                     }
+                    break;
                 }
             }
 
@@ -258,7 +260,7 @@ public class GameState extends State {
 
             if(playerBound.intersects(enemyBound)){
                 //enemy hit enemy
-                player.damage(enemy.getDamage(),enemy.getAttackRate(),enemy.getLastAttack());
+                player.damage(enemy.getDamage(),enemy.getAttackRate());
                 System.out.println("player is damaged");
 
                 if(player.isAlive() == false){

@@ -17,7 +17,6 @@ public abstract class Creature extends Entity{
     protected float yMove;
     protected float damage;
     protected long attackRate;
-    protected long lastAttack;
 
     public void setxMove(float xMove) {
         this.xMove = xMove;
@@ -44,7 +43,6 @@ public abstract class Creature extends Entity{
 
     public Creature(float x, float y,int width, int height) {
         super(x, y,width,height);
-        setLastAttack(System.nanoTime());
     }
 
     @Override
@@ -78,7 +76,7 @@ public abstract class Creature extends Entity{
         y += yMove;
     }
 
-    public void damage(float damage,long attackRate,long lastAttack){
+    public void damage(float damage,long attackRate){
         //if enemies intersect with player
     }
 
@@ -105,12 +103,4 @@ public abstract class Creature extends Entity{
         this.attackRate = attackRate;
     }
 
-
-    public long getLastAttack() {
-        return lastAttack;
-    }
-
-    public void setLastAttack(long lastAttack) {
-        this.lastAttack = lastAttack;
-    }
 }

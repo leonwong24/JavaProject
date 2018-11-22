@@ -34,8 +34,11 @@ public class Tank extends Creature{
     }
 
     @Override
-    public void render(Graphics g) {
-        g.drawImage(Asset.tank,(int)x,(int)y,width,height,null);
+    public void render(Graphics g)
+    {
+        if(alive){
+            g.drawImage(Asset.tank,(int)x,(int)y,width,height,null);
+        }
     }
 
     public float getDamage() {

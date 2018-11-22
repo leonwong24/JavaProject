@@ -1,7 +1,4 @@
 package javaproject.main;
-
-import javaproject.main.Game;
-
 public class Launcher {
 
     public static void main(String args[]) {

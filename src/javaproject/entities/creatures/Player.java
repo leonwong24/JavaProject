@@ -9,6 +9,7 @@ import java.awt.*;
 
 public class Player extends Creature{
     private Game game;
+    private long lastAttack;
 
     public Player(Game game,float x, float y) {
         super(x,y,64,64);
@@ -66,10 +67,10 @@ public class Player extends Creature{
     }
 
     @Override
-    public void damage(float damage,long attackRate,long lastAttack){
+    public void damage(float damage,long attackRate){
         if(System.nanoTime() - lastAttack >= attackRate) {
             setHealth((health) - damage);
-            setLastAttack(System.nanoTime());
+            lastAttack=System.nanoTime();
         }
     }
 
