@@ -1,8 +1,10 @@
 package javaproject.entities;
 
+import javaproject.main.TickAndRender;
+
 import java.awt.*;
 
-public abstract class Entity {
+public abstract class Entity implements TickAndRender {
 
     protected float x, y; //position of entity
     protected int width,height; //size of the entity

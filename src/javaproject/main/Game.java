@@ -3,6 +3,7 @@ package javaproject.main;
 import javaproject.assets.Asset;
 import javaproject.inputs.KeyManager;
 import javaproject.inputs.MouseManager;
+import javaproject.states.GameOverState;
 import javaproject.states.GameState;
 import javaproject.states.MenuState;
 import javaproject.states.State;
@@ -31,6 +32,7 @@ public class Game implements Runnable{
     //State
     private static State gameState;
     public static State menuState;
+    public static State gameOverState;
 
     //Input
     private KeyManager keyManager;
@@ -59,6 +61,7 @@ public class Game implements Runnable{
         //Setting the state
         gameState = new GameState(this);
         menuState = new MenuState(this);
+        gameOverState = new GameOverState(this);
         State.setState(menuState);
 
         //loading assets

@@ -6,9 +6,13 @@ import javaproject.entities.object.Bullet;
 import javaproject.entities.object.Wall;
 import javaproject.inputs.BulletController;
 import javaproject.main.Game;
+import javaproject.main.TickAndRender;
 import org.w3c.dom.css.Rect;
 
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.*;
 
 
@@ -16,9 +20,7 @@ public class GameState extends State {
 
     public Player player;
     private BulletController bc;
-    private int score = 0;
-
-
+    private static int score = 0;
     public int enemyCount = 5;
     //timer
     Timer timer;
@@ -115,6 +117,7 @@ public class GameState extends State {
         }
         g.drawString("Player health:" + player.getHealth(), 1300, 50);
         g.drawString("Score: "  + score, 1300,70);
+        g.drawString("High score: " +GameOverState.highScore,1300,100 );
 
     }
 
@@ -264,15 +267,17 @@ public class GameState extends State {
             if(playerBound.intersects(enemyBound)){
                 //enemy hit enemy
                 player.damage(enemy.getDamage(),enemy.getAttackRate());
-                System.out.println("player is damaged");
 
                 if(player.isAlive() == false){
                     //GAME OVER
-
-                    System.out.println("GAME OVER");
+                    State.setState(game.gameOverState);
                 }
             }
         }
+    }
+
+    public static int getScore() {
+        return score;
     }
 
 

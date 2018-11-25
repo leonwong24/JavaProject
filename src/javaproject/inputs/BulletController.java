@@ -3,11 +3,12 @@ package javaproject.inputs;
 import javaproject.entities.creatures.Player;
 import javaproject.entities.object.Bullet;
 import javaproject.main.Game;
+import javaproject.main.TickAndRender;
 
 import java.awt.*;
 import java.util.LinkedList;
 
-public class BulletController {
+public class BulletController implements TickAndRender {
 
 
 

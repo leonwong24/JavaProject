@@ -35,8 +35,6 @@ public class MenuState extends State {
 
         g.drawString("Play",playButton.x+35,playButton.y+65);
 
-
-
     }
 
 }

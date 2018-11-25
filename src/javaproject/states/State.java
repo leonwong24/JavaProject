@@ -3,8 +3,9 @@ import java.awt.*;
 
 import javaproject.entities.creatures.Player;
 import javaproject.main.Game;
+import javaproject.main.TickAndRender;
 
-public abstract class State {
+public abstract class State implements TickAndRender {
 
     //Variable
     protected Game game;
