@@ -8,19 +8,27 @@ import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**Fast, agile type enemy with fast movement speed and attack rate.This type of enemy will be slow after getting hit by player*/
 public class Crawler extends Creature{
 
     public Player target;
     private double angle;
     private double diffrX,diffrY;
 
+    /**
+     * This is a constructor method that initialise the crawler class method
+     * @param game Current running game thread
+     * @param x crawler x position in the game panel
+     * @param y crawler y postion in the y panael
+     * @param player player object from the game
+     */
     public Crawler(Game game, float x, float y, Player player) {
         super(x, y, 64, 64);
         this.setHealth(30);
         this.setMovementSpeed(2.5f);
         target = player;
         this.setDamage(5f);
-        this.setAttackRate(1000000000L); //1sec
+        this.setAttackRate(500000000L); //0.sec
         this.setKillScore(15); //get 15 point after killing it
     }
 

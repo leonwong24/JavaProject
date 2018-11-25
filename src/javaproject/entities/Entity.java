@@ -4,6 +4,7 @@ import javaproject.main.TickAndRender;
 
 import java.awt.*;
 
+/**All object that will be shown in the game panel are the subclass of this class.*/
 public abstract class Entity implements TickAndRender {
 
     protected float x, y; //position of entity

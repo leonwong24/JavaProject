@@ -7,7 +7,7 @@ import javaproject.main.Game;
 import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
-
+/**Slow, strong type of enemy with slow movement speed , slow attack rate but strong attack . This enemy will not be slow after getting hit */
 public class Tank extends Creature{
 
     public Player target;

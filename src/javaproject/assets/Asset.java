@@ -4,10 +4,13 @@ import javaproject.main.ImageLoader;
 
 import java.awt.image.BufferedImage;
 
-/** This is class that crops the image from the sprite sheet which we can draw the asset image simply calling asset.XX*/
+/**
+ * This is a class that crops the image from the sprite sheet which we can draw the asset image simply calling asset.XX
+ */
 public class Asset {
     public static BufferedImage player,wall,floor,bullet,walker,crawler,tank;
 
+    /**this going to load the class with the image */
     public static void init(){
        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/spitesheet.png"));
 

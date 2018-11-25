@@ -7,7 +7,7 @@ import javaproject.main.Game;
 import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
-
+/**Normal speed type of enemy will normal movement speed ,attack rate and attack strength. This enemy will slightly slow after being hit by player*/
 public class Walker extends Creature{
 
     public Player target;

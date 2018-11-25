@@ -11,6 +11,7 @@ public class SpriteSheet {
         this.sheet = sheet;
     }
 
+    /**rename the getSubimage method to crop*/
     public BufferedImage crop(int x,int y,int width,int height){ //crop the image from the sprite sheet
         return sheet.getSubimage(x,y,width,height);
     }

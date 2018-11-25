@@ -5,8 +5,14 @@ import javaproject.main.Game;
 import java.awt.*;
 import java.io.*;
 
+/**
+ * A state class that only will be run after the player is dead , it shows the game over message and the high score to the player
+ */
 public class GameOverState extends State implements Serializable {
 
+    /**
+     * The high score input from the highScore data file
+     */
     public static int highScore;
     //set up import file and stream
     File inFile = new File("C:/Users/leonw/OneDrive/Desktop/JavaProject/src/javaproject/highScore.data");
@@ -98,6 +104,11 @@ public class GameOverState extends State implements Serializable {
     }
 
 
+    /**
+     * If the player broke the high score , this method will be called to save the high score into the highScore data file
+     * @param highScore
+     * @throws IOException
+     */
     public void save(int highScore) throws IOException {
         ObjectOutputStream outputStreams;
         outputStreams = new ObjectOutputStream(new FileOutputStream ("C:/Users/leonw/OneDrive/Desktop/JavaProject/src/javaproject/highScore.data"));

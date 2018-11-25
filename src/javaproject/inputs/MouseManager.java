@@ -7,7 +7,9 @@ import javaproject.states.State;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-
+/**
+ * This class implements the interface MouseListener for receiving mouse event . It stores mouseclick as boolean and will be turned to true if its called by corresponding mouseevent
+ */
 public class MouseManager implements MouseListener {
     //variable
     public boolean leftPressed;

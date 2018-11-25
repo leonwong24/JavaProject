@@ -11,13 +11,28 @@ import javaproject.states.State;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
+/**
+ * This game class implements a runnable interface, which means this is intended to be executed by a thread.
+ *
+ *
+ */
 public class Game implements Runnable{
 
     //using display class
+    /**
+     * A class that implements JFrame with all setting set. This will create a Jframe and display
+     */
     private Display display;
 
     //variable
+    /**
+     * Game panel width and height
+     */
     public int width,height;
+
+    /**
+     * Game panel title
+     */
     public String title;
 
     //graphics render
@@ -25,8 +40,13 @@ public class Game implements Runnable{
     private Graphics g;
 
     //creating a thread
+    /**
+     * game thread
+     */
     private Thread thread;
-    //boolean for checking if the game is running
+    /**
+     * boolean for checking if the game is running
+     */
     private boolean running = false;
 
     //State
@@ -50,7 +70,9 @@ public class Game implements Runnable{
     }
 
 
-    //initiate everything include graphics before the game loop start
+    /**
+     * initiate everything include graphics before the game loop start
+     */
     private void init(){
         display = new Display(title, width, height);
 
@@ -69,7 +91,9 @@ public class Game implements Runnable{
 
     }
 
-    //update everything in render
+    /**
+     * Update everything in the game
+     */
     private void tick(){
         keyManager.tick();
         mouseManager.tick();
@@ -79,7 +103,9 @@ public class Game implements Runnable{
         }
     }
 
-    //render game
+    /**
+     * render everything in the game
+     */
     private void render(){
         //get bufferstrategy from the canvas,bufferstrategy tells the comp how to draw thing
         bs = display.getCanvas().getBufferStrategy();
@@ -95,27 +121,20 @@ public class Game implements Runnable{
             State.getCurrentState().render(g);
         }
 
-        //Start drawing graphics
-
-        //draw background
-        /*g.drawImage(bg,0,0,1600,900,null);
-
-        //spawn block
-        g.setColor(Color.BLACK);
-        g.fillOval(750, 350, 125, 125); //center block
-        g.drawImage(wall,0,0,300,100,null); //top left block
-        g.drawImage(wall,0,800,300,100,null); //bot left block
-        g.drawImage(wall,1300,0,300,100,null); //top right block
-        g.drawImage(wall,1300,800,300,100,null); //bot right block*/
 
         //end drawing!
         bs.show();
         g.dispose();
     }
-    //run the program
+
+    /**
+     * run the game
+     */
     public void run(){
         init();
 
+
+        //Everything below from https://www.youtube.com/watch?v=w1aB5gc38C8
         int fps = 60;
         double timePerTick = 1000000000 / fps; //This return the time that the system should refresh in order to achieve 60fps
         double delta = 0;
@@ -139,6 +158,9 @@ public class Game implements Runnable{
         }
     }
 
+    /**
+     * Causes this thread to begin execution
+     */
     public synchronized void start(){
         if(running)
             return; //if game is running , don't do anything below
@@ -148,6 +170,9 @@ public class Game implements Runnable{
         thread.start(); //start run() method
     }
 
+    /**
+     * Causes this thread to stop execetion
+     */
     public synchronized void stop(){
         if(!running)
             return; //if game already stop running , don't do anything down below
@@ -160,14 +185,26 @@ public class Game implements Runnable{
         }
     }
 
+    /**
+     * return the keymanager
+     * @return
+     */
     public KeyManager getKeyManager(){
         return keyManager;
     }
 
+    /**
+     * Return the mousemanager
+     * @return
+     */
     public MouseManager getMouseManager(){
         return mouseManager;
     }
 
+    /**
+     * return the gamestate
+     * @return
+     */
     public static GameState getGameState(){
         return (GameState) gameState;
     }

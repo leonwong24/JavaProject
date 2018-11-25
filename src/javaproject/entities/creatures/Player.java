@@ -6,7 +6,7 @@ import javaproject.states.GameState;
 import javaproject.states.State;
 
 import java.awt.*;
-
+/**Character that player plays . It contains the method to control a player movement and all the calculation while is damaged by the enemies*/
 public class Player extends Creature{
     private Game game;
     private long lastAttack;

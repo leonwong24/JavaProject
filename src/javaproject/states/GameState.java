@@ -16,6 +16,9 @@ import java.io.FileOutputStream;
 import java.util.*;
 
 
+/**
+ * This class will only be run if the gamestate is set to running. This class contains most of the logic/algorithm in this game such as enemySpawn, collision
+ */
 public class GameState extends State {
 
     public Player player;
@@ -32,7 +35,10 @@ public class GameState extends State {
     public LinkedList<Bullet> bullets = new LinkedList<>();
 
 
-
+    /**
+     * This is the gameState constructor to initialise gamestate object
+     * @param game Current running game thread
+     */
     public GameState(Game game) {
         super(game);
         player = new Player(game, 800, 450);
