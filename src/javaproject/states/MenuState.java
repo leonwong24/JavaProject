@@ -28,7 +28,7 @@ public class MenuState extends State {
         Font font = new Font(Font.MONOSPACED,Font.PLAIN,50);
         g.setFont(font);
         g.setColor(Color.WHITE);
-        g.drawString("Shooting GAME!!!!",500,200);
+        g.drawString("Shooting Game",500,200);
 
         Graphics2D g2d = (Graphics2D)g;
         g2d.draw(playButton);

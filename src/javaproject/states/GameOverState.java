@@ -88,7 +88,7 @@ public class GameOverState extends State implements Serializable {
 
         //break high score
         if(GameState.getScore()>highScore){
-            g.drawString("Congratulation, you broke the high score",300,400);
+            g.drawString("Congratulation, you broke the high score",100,400);
             g.drawString("Your high score is " + GameState.getScore(),300,500);
             try {
                 save(GameState.getScore());

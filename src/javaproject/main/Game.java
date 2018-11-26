@@ -13,7 +13,7 @@ import java.awt.image.BufferStrategy;
 
 /**
  * This game class implements a runnable interface, which means this is intended to be executed by a thread.
- * 
+ *
  *
  */
 public class Game implements Runnable{
