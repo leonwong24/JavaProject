@@ -1,7 +1,7 @@
 package javaproject.inputs;
 
-import javaproject.entities.creatures.Player;
-import javaproject.entities.object.Bullet;
+import javaproject.entities.Player;
+import javaproject.entities.Bullet;
 import javaproject.main.Game;
 import javaproject.main.TickAndRender;
 

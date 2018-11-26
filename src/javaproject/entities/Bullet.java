@@ -1,8 +1,6 @@
-package javaproject.entities.object;
+package javaproject.entities;
 
 import javaproject.assets.Asset;
-import javaproject.entities.Entity;
-import javaproject.entities.creatures.Player;
 import javaproject.main.Game;
 
 import java.awt.*;

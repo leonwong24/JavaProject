@@ -1,9 +1,7 @@
-package javaproject.entities.creatures;
+package javaproject.entities;
 
 import javaproject.assets.Asset;
 import javaproject.main.Game;
-import javaproject.states.GameState;
-import javaproject.states.State;
 
 import java.awt.*;
 /**Character that player plays . It contains the method to control a player movement and all the calculation while is damaged by the enemies*/

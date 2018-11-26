@@ -1,27 +1,26 @@
-package javaproject.entities.creatures;
+package javaproject.entities;
 
 import javaproject.assets.Asset;
-import javaproject.entities.object.Bullet;
 import javaproject.main.Game;
 
 import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
-/**Slow, strong type of enemy with slow movement speed , slow attack rate but strong attack . This enemy will not be slow after getting hit */
-public class Tank extends Creature{
+/**Normal speed type of enemy will normal movement speed ,attack rate and attack strength. This enemy will slightly slow after being hit by player*/
+public class Walker extends Creature{
 
     public Player target;
     private double angle;
     private double diffrX,diffrY;
 
-    public Tank(Game game, float x, float y,Player player) {
-        super(x, y, 96, 96);
-        this.setHealth(100);
-        this.setMovementSpeed(0.5f);
+    public Walker(Game game, float x, float y,Player player) {
+        super(x, y, 64, 64);
+        this.setHealth(50);
+        this.setMovementSpeed(1f);
         target = player;
-        this.setDamage(20f);
-        this.setAttackRate(3000000000L); //3sec
-        this.setKillScore(30);//get 10 point after killing it
+        this.setDamage(10f);
+        this.setAttackRate(2000000000L); //2sec
+        this.setKillScore(10); //get 10 point after killing it
     }
 
     @Override
@@ -35,11 +34,11 @@ public class Tank extends Creature{
     }
 
     @Override
-    public void render(Graphics g)
-    {
+    public void render(Graphics g) {
         if(alive){
-            g.drawImage(Asset.tank,(int)x,(int)y,width,height,null);
+            g.drawImage(Asset.walker,(int)x,(int)y,width,height,null);
         }
+
     }
 
     public float getDamage() {
@@ -50,7 +49,7 @@ public class Tank extends Creature{
         this.damage = damage;
     }
 
-    public void chaseTarget(){
+    private void chaseTarget(){
         xMove = 0;
         yMove = 0;
         //this is the algorithm of chasing the players
@@ -70,7 +69,24 @@ public class Tank extends Creature{
 
     @Override
     public void hitByBullet() {
-        //A tanker has no side-effect after hit by bullet
+        //A walker has slightly slowed the movement speed after being hit by bullet
+        setMovementSpeed(0.75f);
         setHealth(health - Bullet.getDamage());
+
+
+        //set back the movement speed after 1 sec delay
+        Timer t = new Timer();
+        TimerTask restoreSpeed = new TimerTask(){
+            int count = 0;
+            @Override
+            public void run() {
+                setMovementSpeed(1f);
+                count++;
+                if(count > 1)
+                    t.cancel();
+                t.purge();
+            }
+        };
+        t.schedule(restoreSpeed,1000);
     }
 }

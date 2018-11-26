@@ -1,11 +1,8 @@
-package javaproject.entities.creatures;
+package javaproject.entities;
 
 import javaproject.entities.Entity;
-import javaproject.entities.object.Bullet;
 
 import java.awt.*;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /** An abstract class that contains the method and variable for all the creature in the game */
 

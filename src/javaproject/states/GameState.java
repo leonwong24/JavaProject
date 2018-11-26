@@ -1,18 +1,11 @@
 package javaproject.states;
 
 import javaproject.assets.Asset;
-import javaproject.entities.creatures.*;
-import javaproject.entities.object.Bullet;
-import javaproject.entities.object.Wall;
+import javaproject.entities.*;
 import javaproject.inputs.BulletController;
 import javaproject.main.Game;
-import javaproject.main.TickAndRender;
-import org.w3c.dom.css.Rect;
 
 import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.*;
 
 

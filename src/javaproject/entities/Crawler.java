@@ -1,27 +1,34 @@
-package javaproject.entities.creatures;
+package javaproject.entities;
 
 import javaproject.assets.Asset;
-import javaproject.entities.object.Bullet;
 import javaproject.main.Game;
 
 import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
-/**Normal speed type of enemy will normal movement speed ,attack rate and attack strength. This enemy will slightly slow after being hit by player*/
-public class Walker extends Creature{
+
+/**Fast, agile type enemy with fast movement speed and attack rate.This type of enemy will be slow after getting hit by player*/
+public class Crawler extends Creature{
 
     public Player target;
     private double angle;
     private double diffrX,diffrY;
 
-    public Walker(Game game, float x, float y,Player player) {
+    /**
+     * This is a constructor method that initialise the crawler class method
+     * @param game Current running game thread
+     * @param x crawler x position in the game panel
+     * @param y crawler y postion in the y panael
+     * @param player player object from the game
+     */
+    public Crawler(Game game, float x, float y, Player player) {
         super(x, y, 64, 64);
-        this.setHealth(50);
-        this.setMovementSpeed(1f);
+        this.setHealth(30);
+        this.setMovementSpeed(2.5f);
         target = player;
-        this.setDamage(10f);
-        this.setAttackRate(2000000000L); //2sec
-        this.setKillScore(10); //get 10 point after killing it
+        this.setDamage(5f);
+        this.setAttackRate(500000000L); //0.sec
+        this.setKillScore(15); //get 15 point after killing it
     }
 
     @Override
@@ -37,7 +44,7 @@ public class Walker extends Creature{
     @Override
     public void render(Graphics g) {
         if(alive){
-            g.drawImage(Asset.walker,(int)x,(int)y,width,height,null);
+            g.drawImage(Asset.crawler,(int)x,(int)y,width,height,null);
         }
 
     }
@@ -70,24 +77,24 @@ public class Walker extends Creature{
 
     @Override
     public void hitByBullet() {
-        //A walker has slightly slowed the movement speed after being hit by bullet
-        setMovementSpeed(0.75f);
+        //A crawler will significantly slowed after being hit by bullet
+        setMovementSpeed(0.5f);
         setHealth(health - Bullet.getDamage());
 
 
-        //set back the movement speed after 1 sec delay
+        //set back the movement speed after 2 sec delay
         Timer t = new Timer();
         TimerTask restoreSpeed = new TimerTask(){
-            int count = 0;
+        int count = 0;
             @Override
             public void run() {
-                setMovementSpeed(1f);
+                setMovementSpeed(2.5f);
                 count++;
                 if(count > 1)
                     t.cancel();
-                t.purge();
+                    t.purge();
             }
         };
-        t.schedule(restoreSpeed,1000);
+        t.schedule(restoreSpeed,2000);
     }
 }

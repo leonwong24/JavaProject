@@ -1,7 +1,6 @@
 package javaproject.states;
 import java.awt.*;
 
-import javaproject.entities.creatures.Player;
 import javaproject.main.Game;
 import javaproject.main.TickAndRender;
 
