@@ -1,7 +1,6 @@
 package javaproject.entities;
 
 import javaproject.assets.Asset;
-import javaproject.main.Game;
 
 import java.awt.*;
 
@@ -12,7 +11,7 @@ public class Tank extends Creature{
     private double angle;
     private double diffrX,diffrY;
 
-    public Tank(Game game, float x, float y,Player player) {
+    public Tank( float x, float y,Player player) {
         super(x, y, 96, 96);
         this.setHealth(100);
         this.setMovementSpeed(0.5f);

@@ -73,7 +73,7 @@ public class BulletController implements TickAndRender {
 
     /**
      * This return the linkedlist<bullet> object
-     * @return
+     * @return bullet linkedlist
      */
     public LinkedList<Bullet> getBullets() {
         return bullets;

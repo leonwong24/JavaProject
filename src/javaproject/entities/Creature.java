@@ -1,6 +1,5 @@
 package javaproject.entities;
 
-import javaproject.entities.Entity;
 
 import java.awt.*;
 

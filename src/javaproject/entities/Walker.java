@@ -1,7 +1,6 @@
 package javaproject.entities;
 
 import javaproject.assets.Asset;
-import javaproject.main.Game;
 
 import java.awt.*;
 import java.util.Timer;
@@ -13,7 +12,7 @@ public class Walker extends Creature{
     private double angle;
     private double diffrX,diffrY;
 
-    public Walker(Game game, float x, float y,Player player) {
+    public Walker( float x, float y,Player player) {
         super(x, y, 64, 64);
         this.setHealth(50);
         this.setMovementSpeed(1f);

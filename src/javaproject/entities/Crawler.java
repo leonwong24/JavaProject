@@ -1,7 +1,7 @@
 package javaproject.entities;
 
 import javaproject.assets.Asset;
-import javaproject.main.Game;
+
 
 import java.awt.*;
 import java.util.Timer;
@@ -16,12 +16,12 @@ public class Crawler extends Creature{
 
     /**
      * This is a constructor method that initialise the crawler class method
-     * @param game Current running game thread
+     *
      * @param x crawler x position in the game panel
      * @param y crawler y postion in the y panael
      * @param player player object from the game
      */
-    public Crawler(Game game, float x, float y, Player player) {
+    public Crawler(float x, float y, Player player) {
         super(x, y, 64, 64);
         this.setHealth(30);
         this.setMovementSpeed(2.5f);

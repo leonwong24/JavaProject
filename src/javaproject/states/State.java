@@ -1,5 +1,5 @@
 package javaproject.states;
-import java.awt.*;
+import java.awt.Graphics;
 
 import javaproject.main.Game;
 import javaproject.main.TickAndRender;

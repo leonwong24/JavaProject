@@ -1,7 +1,6 @@
 package javaproject.inputs;
 
 import javaproject.main.Game;
-import javaproject.states.GameState;
 import javaproject.states.State;
 
 import java.awt.event.MouseEvent;

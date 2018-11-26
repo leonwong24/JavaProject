@@ -155,13 +155,13 @@ public class GameState extends State {
 
             if (enemyPicker == 1) {
                 //spawn walker
-                enemies.add(new Walker(game, spawnX,spawnY, player));
+                enemies.add(new Walker(spawnX,spawnY, player));
             } else if (enemyPicker == 2) {
                 //spawn crawler
-                enemies.add(new Crawler(game, spawnX,spawnY, player));
+                enemies.add(new Crawler(spawnX,spawnY, player));
             } else {
                 //spawn tanker
-                enemies.add(new Tank(game, spawnX,spawnY, player));
+                enemies.add(new Tank(spawnX,spawnY, player));
             }
     }
 
