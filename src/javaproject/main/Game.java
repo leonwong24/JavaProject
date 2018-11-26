@@ -13,7 +13,7 @@ import java.awt.image.BufferStrategy;
 
 /**
  * This game class implements a runnable interface, which means this is intended to be executed by a thread.
- *
+ * @Author Leon Wong
  *
  */
 public class Game implements Runnable{
@@ -36,7 +36,13 @@ public class Game implements Runnable{
     public String title;
 
     //graphics render
+    /**
+     * Use a BufferStrategy for the convenience of dealing with drawing to surfaces and components , from : https://docs.oracle.com/javase/tutorial/extra/fullscreen/bufferstrategy.html
+     */
     private BufferStrategy bs;
+    /**
+     * Use it to draw to the game panel
+     */
     private Graphics g;
 
     //creating a thread
@@ -50,15 +56,37 @@ public class Game implements Runnable{
     private boolean running = false;
 
     //State
+    /**
+     * A state instances for gameState
+     */
     private static State gameState;
+    /**
+     * A state instances for menuState
+     */
     public static State menuState;
+    /**
+     * A state instances for gameOverState
+     */
     public static State gameOverState;
 
     //Input
+    /**
+     * instance of keymanager
+     */
     private KeyManager keyManager;
+    /**
+     * instance of mousemanager
+     */
     private MouseManager mouseManager;
 
     //Constructor
+
+    /**
+     * This constructor method take 3 parameter for the game panel title, width and height. It also initialise the keymanager and mousemanager
+     * @param title The title for the game panel
+     * @param width The width of the game panel
+     * @param height The height of the game panel
+     */
     public Game(String title, int width, int height){
         this.width = width;
         this.height = height;
@@ -128,7 +156,7 @@ public class Game implements Runnable{
     }
 
     /**
-     * run the game
+     * run the game which include FPS algorithm which is going to set the game to run on 60 fps
      */
     public void run(){
         init();
@@ -171,7 +199,7 @@ public class Game implements Runnable{
     }
 
     /**
-     * Causes this thread to stop execetion
+     * Causes this thread to stop execution
      */
     public synchronized void stop(){
         if(!running)
