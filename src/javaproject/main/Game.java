@@ -13,7 +13,7 @@ import java.awt.image.BufferStrategy;
 
 /**
  * This game class implements a runnable interface, which means this is intended to be executed by a thread.
- * @Author Leon Wong
+ * 
  *
  */
 public class Game implements Runnable{
@@ -215,7 +215,7 @@ public class Game implements Runnable{
 
     /**
      * return the keymanager
-     * @return
+     * @return KeyManager object
      */
     public KeyManager getKeyManager(){
         return keyManager;
@@ -223,7 +223,7 @@ public class Game implements Runnable{
 
     /**
      * Return the mousemanager
-     * @return
+     * @return current Mousemanager object
      */
     public MouseManager getMouseManager(){
         return mouseManager;
@@ -231,7 +231,7 @@ public class Game implements Runnable{
 
     /**
      * return the gamestate
-     * @return
+     * @return current GameState object
      */
     public static GameState getGameState(){
         return (GameState) gameState;
